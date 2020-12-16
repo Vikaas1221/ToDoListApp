@@ -26,6 +26,8 @@
         android:layout_width="match_parent"
         android:id="@+id/updateButton"
         android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:text="Update Item"
         android:layout_height="wrap_content"/>
 

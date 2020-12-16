@@ -1,6 +1,7 @@
 package com.ca2.todolistapp.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ca2.todolistapp.Databases.Database;
@@ -55,8 +57,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>
             @Override
             public void onClick(View view)
             {
-                int r=database.deleteItem(data.getId());
-                listner.response(r);
+               conformDialog(data.getId());
             }
         });
         holder.update.setOnClickListener(new View.OnClickListener()
@@ -67,6 +68,35 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>
                 itemIdListner.currentItem(data.getId());
             }
         });
+    }
+    public void conformDialog(final int id)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage("Are you sure you want delete?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which)
+            {
+                int r=database.deleteItem(id);
+                listner.response(r);
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

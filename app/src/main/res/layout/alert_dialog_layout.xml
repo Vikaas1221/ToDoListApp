@@ -26,6 +26,8 @@
         android:layout_width="match_parent"
         android:id="@+id/addButton"
         android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:text="Add Item"
         android:layout_height="wrap_content"/>
 
